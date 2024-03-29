@@ -1,0 +1,11 @@
+package New_Project.superexample;
+
+public class Manager extends Employee{
+	private String deptname;
+
+	public Manager(int employeeno, String deptname) {
+		super(empno,name);
+		// TODO Auto-generated constructor stub
+	}
+	
+}

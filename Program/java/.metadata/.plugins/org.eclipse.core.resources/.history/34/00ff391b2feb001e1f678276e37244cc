@@ -1,0 +1,16 @@
+package New_Project.stringbufferexample;
+
+public class QuizDemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String s1=new String();
+		String s=new String("adedo gaani unnapatuga");
+		StringBuffer sb=new StringBuffer("ammai mukku meeda sutiga");
+		System.out.println(s1);
+		System.out.println(sb);
+		System.out.println(s);
+
+	}
+
+}

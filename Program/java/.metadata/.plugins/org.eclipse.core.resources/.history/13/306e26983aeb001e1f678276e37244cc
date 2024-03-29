@@ -1,0 +1,43 @@
+package New_Project.stringbufferexample;
+import java.util.Scanner;
+public class Exercises {
+	public static void main(String[] args) {
+		String hello="Hello";
+		String sir=" Sir.";
+		String result = hello.concat(sir);
+		System.out.println(result);
+		System.out.println("Balli Gokul krishnan");
+		
+		
+		    
+		        // Create a Scanner object to read input from the console
+		        Scanner input = new Scanner(System.in);
+
+		        // Prompt the user to input their full name
+		        System.out.print("Enter your full name: ");
+		        String fullName = input.nextLine();
+
+		        // Split the full name into individual words
+		        String[] words = fullName.split(" ");
+
+		        // Initialize a string to store the initials
+		        StringBuilder initials = new StringBuilder();
+
+		        // Extract the first character of each word and append it to the initials
+		        for (String word : words) {
+		            if (!word.isEmpty()) {
+		                initials.append(word.charAt(0));
+		            }
+		        }
+
+		        // Display the initials in uppercase
+		        System.out.println("Your initials are: " + initials.toString().toUpperCase());
+		    }
+		
+
+		
+		
+
+		
+	}
+

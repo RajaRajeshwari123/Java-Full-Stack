@@ -1,0 +1,15 @@
+package New_Project.superexample;
+
+public class Employee {
+	Integer EmpNo;
+	String EmpName;
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+		System.out.println("Employee No-arg constuctor Begin");
+		employee=0;employee= null;
+		System.out.println("Employee 1")
+	}
+	
+
+}

@@ -1,0 +1,5 @@
+package New_Project;
+
+public abstract class Payment {
+
+}

@@ -1,0 +1,19 @@
+package New_Project.assignment;
+
+public class StringDigit {
+	
+	    public static boolean isDigit(String str) {
+	        for (int i = 0; i < str.length(); i++) {
+	            if (str.charAt(i) > '0' && str.charAt(i) < '9') {
+	                return true;
+	            }
+	        }
+	        return false;
+	    }
+	    public static void main(String[] args) {
+	        String input = "Hello";
+	        System.out.println(isDigit(input));
+	    }
+	}
+
+

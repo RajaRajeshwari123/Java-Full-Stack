@@ -1,0 +1,5 @@
+package layeredarchitectureexample.model;
+
+public class Login {
+
+}

@@ -1,0 +1,23 @@
+package New_Project.association;
+
+public class Address {
+	private Integer addressId;
+	private Integer houseNo;
+	private String street;
+	private String city;
+	private String country;
+	public Address() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Address(Integer addressId, Integer houseNo, String street, String city, String country) {
+		super();
+		this.addressId = addressId;
+		this.houseNo = houseNo;
+		this.street = street;
+		this.city = city;
+		this.country = country;
+	}
+	
+
+}

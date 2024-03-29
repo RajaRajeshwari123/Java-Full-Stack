@@ -1,0 +1,30 @@
+package New_Project.stringbufferexample;
+import java.util.Scanner;
+public class Exercises {
+	public static void main(String[] args) {
+		String hello="Hello";
+		String sir=" Sir.";
+		String result = hello.concat(sir);
+		System.out.println(result);
+		System.out.println("Balli Gokul krishnan");
+
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter your full name: ");
+		String fullName = input.nextLine();
+		String[] words = fullName.split(" ");
+		StringBuilder initials = new StringBuilder();
+		for (String word : words) {
+		       if (!word.isEmpty()) {
+		            initials.append(word.charAt(0));
+		            }
+		        }
+		        System.out.println("Your initials are: " + initials.toString());
+		    }
+		
+
+		
+		
+
+		
+	}
+

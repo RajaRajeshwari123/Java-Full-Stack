@@ -1,0 +1,5 @@
+package layeredarchitectureexample.service;
+
+public class LoginService {
+
+}

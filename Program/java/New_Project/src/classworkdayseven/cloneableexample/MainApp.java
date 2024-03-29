@@ -1,0 +1,24 @@
+package classworkdayseven.cloneableexample;
+
+public class MainApp {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Student student=new Student();
+		student.setStudentId(15);
+		student.setStudentName("Raji");
+		
+		System.out.println(student.hashCode());
+		System.out.println(student);
+		try {
+			Student stu=student.cloneTest();
+			System.out.println(stu.hashCode());
+			System.out.println(stu);
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+	}
+
+}

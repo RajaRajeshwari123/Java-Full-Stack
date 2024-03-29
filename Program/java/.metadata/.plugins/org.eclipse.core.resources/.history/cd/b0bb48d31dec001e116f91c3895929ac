@@ -1,0 +1,5 @@
+package classworkdayfive.exceptions;
+
+public class PasswordMismatchException {
+
+}

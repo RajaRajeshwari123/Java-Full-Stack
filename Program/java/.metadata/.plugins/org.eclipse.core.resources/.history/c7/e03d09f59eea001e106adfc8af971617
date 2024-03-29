@@ -1,0 +1,12 @@
+package New_Project.stringexamples;
+
+public class StringAssignment {
+	String str="ABC1234";
+	String s1="Hello";
+	Integer s2=3456;
+	System.out.println(str);
+	
+	
+	}
+
+

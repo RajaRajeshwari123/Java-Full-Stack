@@ -1,0 +1,70 @@
+package New_Project.stringbufferexample;
+import java.util.Scanner;
+//import java.util.Arrays;
+public class Exercises {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter First Name:");
+		String fname=sc.nextLine();
+		System.out.println("Enter Last Name:");
+		String lname=sc.nextLine();
+		System.out.println(fname+" "+lname.charAt(0));
+		System.out.println("Your initial is:"+lname.charAt(0));
+		sc.close();
+		
+	}}
+//		String hello="Hello";
+//		String sir=" Sir.";
+//		String fullName = input.nextLine();
+//		String str1 = input.nextLine();
+//		String str2 = input.nextLine();
+//		 
+//		String result = hello.concat(sir);
+//		System.out.println(result);
+//		System.out.println("Balli Gokul krishnan");
+//		System.out.print("Enter your full name: ");
+//		
+//		
+//		String[] words = fullName.split(" ");
+//		StringBuilder initials = new StringBuilder();
+//		for (String word : words) {
+//		       if (!word.isEmpty()) {
+//		            initials.append(word.charAt(0));
+//		            }
+//		        }
+//		        System.out.println("Your initials are: " + initials.toString() .toUpperCase());		   
+//		        System.out.print("Enter the first string: ");      
+//
+//		        System.out.print("Enter the second string: ");
+//		        
+//
+//		        str1 = str1.replaceAll("[\\s\\p{Punct}]", "").toLowerCase();
+//		        str2 = str2.replaceAll("[\\s\\p{Punct}]", "").toLowerCase();
+//			        if (str1.length() != str2.length()) {
+//			            System.out.println("The strings are not anagrams.");
+//			            return;
+//			        }
+//	        char[] charArray1 = str1.toCharArray();
+//	        char[] charArray2 = str2.toCharArray();
+//	        Arrays.sort(charArray1);
+//	        Arrays.sort(charArray2);
+//
+//	        boolean areAnagrams = Arrays.equals(charArray1, charArray2);
+//
+//	        if (areAnagrams) {
+//	            System.out.println("The strings are anagrams.");
+//	        } else {
+//	            System.out.println("The strings are not anagrams.");
+//	        }
+//	    }
+//	
+//	
+//
+//		
+//
+//}	
+//		
+//
+//		
+//	
+//

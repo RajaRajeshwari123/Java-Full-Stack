@@ -1,0 +1,5 @@
+package New_Project.multipleinheritance;
+
+public abstract class GSTRate {
+
+}

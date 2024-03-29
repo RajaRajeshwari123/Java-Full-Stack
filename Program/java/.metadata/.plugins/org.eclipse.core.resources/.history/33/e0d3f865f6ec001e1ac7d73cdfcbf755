@@ -1,0 +1,45 @@
+package classworkdayseven.workingwithFiles;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+public class TextFileHandler {
+
+    // A map to store country names and their capitals
+    private Map<String, String> countryCapitals;
+
+    public TextFileHandler() {
+        // Initialize the map with some sample data (you can replace this with your actual data)
+        countryCapitals = new HashMap<>();
+        countryCapitals.put("Canada", "Ottawa");
+        countryCapitals.put("United States", "Washington, D.C.");
+        countryCapitals.put("United Kingdom", "London");
+        // ... add more countries and capitals
+    }
+
+    // Method to write country names and capitals starting with a given letter to a file
+    public void writeCountriesAndCapitalsToFile(char startingLetter, String filePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (Map.Entry<String, String> entry : countryCapitals.entrySet()) {
+                String countryName = entry.getKey();
+                String capital = entry.getValue();
+                if (countryName.charAt(0) == startingLetter) {
+                    writer.write(countryName + " - " + capital);
+                    writer.newLine();
+                }
+            }
+            System.out.println("Data written to " + filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        // Example usage
+        TextFileHandler fileHandler = new TextFileHandler();
+        fileHandler.writeCountriesAndCapitalsToFile('U', "countries.txt");
+    }
+}

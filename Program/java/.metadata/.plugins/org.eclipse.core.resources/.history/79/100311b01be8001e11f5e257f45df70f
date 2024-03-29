@@ -1,0 +1,16 @@
+package New_Project;
+
+public class IntegerSearch extends AbstractSearch {
+    @Override
+    public boolean search(Object[] objList, Object Target) {
+        if (Target instanceof Integer) {
+            int target = (int) Target;
+            for (Object item : objList) {
+                if (item instanceof Integer && (int) item == target) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}

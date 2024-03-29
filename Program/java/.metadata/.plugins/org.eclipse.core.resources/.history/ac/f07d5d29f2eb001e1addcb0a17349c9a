@@ -1,0 +1,27 @@
+package New_Project.assignment;
+
+public class Permutations {
+	public static void main(String[] args) {
+        String input = "xyz";
+        printPermutations(input);
+    }
+
+    // Recursive function to print all permutations
+    static void printPermutations(String str) {
+        printPermutationsHelper(str, "");
+    }
+
+    static void printPermutationsHelper(String remaining, String current) {
+        if (remaining.length() == 0) {
+            System.out.print(current + " ");
+            return;
+        }
+
+        for (int i = 0; i < remaining.length(); i++) {
+            char ch = remaining.charAt(i);
+            String rest = remaining.substring(0, i) + remaining.substring(i + 1);
+            printPermutationsHelper(rest, current + ch);
+        }
+    }
+
+}

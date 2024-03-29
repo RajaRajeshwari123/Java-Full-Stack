@@ -1,0 +1,18 @@
+package New_Project;
+
+public class IntegerSearch extends AbstractSearch{
+	public boolean search(Object[]obj_list,Object obj) {
+		 if (obj instanceof Integer) {
+	            Integer target = (Integer) obj;
+	            for (Object item : obj_list) {
+	                if (item instanceof Integer && item.equals(target)) {
+		return true;
+		
+	}
+
+}
+		 }
+		 return false;
+	}
+}
+		 

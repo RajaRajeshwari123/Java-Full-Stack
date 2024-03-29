@@ -1,0 +1,9 @@
+package New_Project;
+
+public class IntegerSearch extends AbstractSearch{
+	public boolean search(Object[]obj_list,Object obj) {
+		return false;
+		
+	}
+
+}

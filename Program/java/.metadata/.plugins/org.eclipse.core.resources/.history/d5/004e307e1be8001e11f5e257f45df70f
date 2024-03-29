@@ -1,0 +1,19 @@
+package New_Project;
+
+public class StringSearch extends AbstractSearch{
+	public boolean search(Object[]obj_list,Object obj) {
+	 if (!(obj instanceof String)) {
+		 return false;
+	 }
+         String target = (String) obj;
+         for (Object item : obj_list) {
+             if (item instanceof String && item.equals(target)) {
+            	 return true;
+             }
+
+}
+	 
+	 return false;
+	 }
+}
+

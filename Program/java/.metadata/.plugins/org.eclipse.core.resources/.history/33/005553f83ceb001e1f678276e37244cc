@@ -1,0 +1,57 @@
+package New_Project.stringbufferexample;
+import java.util.Scanner;
+import java.util.Arrays;
+public class Exercises {
+	public static void main(String[] args) {
+		String hello="Hello";
+		String sir=" Sir.";
+		String result = hello.concat(sir);
+		System.out.println(result);
+		System.out.println("Balli Gokul krishnan");
+
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter your full name: ");
+		String fullName = input.nextLine();
+		String[] words = fullName.split(" ");
+		StringBuilder initials = new StringBuilder();
+		for (String word : words) {
+		       if (!word.isEmpty()) {
+		            initials.append(word.charAt(0));
+		            }
+		        }
+		        System.out.println("Your initials are: " + initials.toString() .toUpperCase());		   
+		        System.out.print("Enter the first string: ");
+		        String str1 = input.nextLine();
+
+		        System.out.print("Enter the second string: ");
+		        String str2 = input.nextLine();
+
+		        str1 = str1.replaceAll("[\\s\\p{Punct}]", "").toLowerCase();
+		        str2 = str2.replaceAll("[\\s\\p{Punct}]", "").toLowerCase();
+			        if (str1.length() != str2.length()) {
+			            System.out.println("The strings are not anagrams.");
+			            return;
+			        }
+	        char[] charArray1 = str1.toCharArray();
+	        char[] charArray2 = str2.toCharArray();
+	        Arrays.sort(charArray1);
+	        Arrays.sort(charArray2);
+
+	        boolean areAnagrams = Arrays.equals(charArray1, charArray2);
+
+	        if (areAnagrams) {
+	            System.out.println("The strings are anagrams.");
+	        } else {
+	            System.out.println("The strings are not anagrams.");
+	        }
+	    }
+	
+
+		
+
+}	
+		
+
+		
+	
+

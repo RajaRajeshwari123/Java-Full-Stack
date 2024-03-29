@@ -1,0 +1,6 @@
+package New_Project;
+
+public abstract class AbstractSearch {
+	public abstract boolean Search(Object[]obj_list,Object obj);
+
+}

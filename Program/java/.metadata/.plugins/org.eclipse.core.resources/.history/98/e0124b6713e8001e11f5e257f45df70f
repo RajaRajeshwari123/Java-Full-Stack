@@ -1,0 +1,7 @@
+package New_Project;
+
+public abstract class AbstractionSearch {
+	public abstract boolean Search(Object[]obj_list,Object obj);
+
+}
+ 

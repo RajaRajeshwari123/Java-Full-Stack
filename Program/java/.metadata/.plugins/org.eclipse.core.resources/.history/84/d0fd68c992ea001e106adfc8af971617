@@ -1,0 +1,15 @@
+package New_Project.stringexamples;
+
+public class StringAnotherDemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//03451627818363531789
+		String helloworld="Hello World !!";
+		System.out.println(helloworld.length());
+		System.out.println(helloworld.charAt(10));
+		System.out.println(helloworld.indexOf('1'));
+
+	}
+
+}

@@ -1,0 +1,16 @@
+package New_Project.stringbufferexample;
+
+public class Exercises {
+	public static void main(String[] args) {
+		String hello="Hello";
+		String sir=" Sir.";
+		String result = hello.concat(sir);
+		System.out.println(result);
+		System.out.println("Balli Gokul krishnan");
+		
+		
+		
+
+		
+	}
+}

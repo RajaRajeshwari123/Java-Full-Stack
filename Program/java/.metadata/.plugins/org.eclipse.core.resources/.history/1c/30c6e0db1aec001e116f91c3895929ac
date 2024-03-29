@@ -1,0 +1,51 @@
+package New_Project.assignment;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+public class Integer1 {
+	
+	 
+	
+	    private Listener listener;
+	 
+	    public void Integer(Listener listener) {
+	        this.listener = listener;
+	    }
+	 
+	    public void findInteger(List<Integer> inputList, int target) {
+	        for (int i = 0; i < inputList.size(); i++) {
+	            if (inputList.get(i) == target) {
+	                listener.onIntegerFound(target, i);
+	            }
+	        }
+	    }
+	 
+	    public static void main(String[] args) {
+	        Scanner scanner = new Scanner(System.in);
+	 
+	        System.out.print("Enter the target number: ");
+	        int targetNumber = scanner.nextInt();
+	 
+	        System.out.print("Enter the size of the list: ");
+	        int listSize = scanner.nextInt();
+	 
+	        System.out.println("Enter " + listSize + " integers, separated by spaces:");
+	        List<Integer> myList = new ArrayList<>();
+	        for (int i = 0; i < listSize; i++) {
+	            myList.add(scanner.nextInt());
+	        }
+	 
+	        Integer finder = new Integer((number, index) -> {
+	            System.out.println("Found " + number + " at index " + index);
+	        });
+	 
+	        finder.findInteger(myList, targetNumber);
+	        scanner.close();
+	    }
+	}
+	 
+	interface Listener {
+	    void onIntegerFound(int number, int index);
+	}
+
+

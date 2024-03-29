@@ -1,0 +1,18 @@
+package layeredarchitectureexample.dao;
+import layeredarchitectureexample.model.Login;
+
+public class LoginDAOImpl implements LoginDAO{
+
+	@Override
+	public Login getUserDetail(String UserName) {
+		Login login=new Login("admin","password");
+		if(login.getUserName().equals(UserName)) {
+			return login;
+		}
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+}
+
