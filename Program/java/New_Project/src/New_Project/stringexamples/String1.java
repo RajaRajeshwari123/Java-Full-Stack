@@ -9,12 +9,17 @@ public class String1 {
 		
 		int vowelCounter=0;
 		int consonantCount=0;
-		for(int index=0;index<name.length;index++) {
-			if(name.(index)=='l') {
+		for(int index=0;index<name.length();index++) {
+			if(name(index)=='l') {
 				
 			}
 		}
 		}
+
+	private static char name(int index) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	}
 
