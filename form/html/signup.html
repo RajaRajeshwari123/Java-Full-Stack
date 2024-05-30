@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Signup</title>
+  <link rel="stylesheet" href="../css/signup.css">
+  <script src="../js/signup.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h2>Signup</h2>
+    <form id="signupForm">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Enter username">
+        <small class="text-danger" id="usernameError"></small>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Enter email">
+        <small class="text-danger" id="emailError"></small>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Enter password">
+        <small class="text-danger" id="passwordError"></small>
+      </div>
+      <div class="form-group">
+        <label for="mobile">Mobile Number:</label>
+        <input type="text" id="mobile" placeholder="Enter mobile number">
+        <small class="text-danger" id="mobileError"></small>
+      </div>
+      
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea id="address" placeholder="Enter address"></textarea>
+        <small class="text-danger" id="addressError"></small>
+      </div>
+      <button type="submit" onclick="signup()">Sign Up</button>
+    </form>      
+    <p>Already have an account?<a href="../html/signin.html" class="signInButton">Sign In</a></p>
+   
+  </div> 
+ 
+</body>
+</html>
