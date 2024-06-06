@@ -9,8 +9,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.prodapt.cmsprojectmain.entities.User;
-
+import com.prodapt.cmsprojectmain.entities.Role;
+import com.prodapt.cmsprojectmain.entities.UserEntity;
 
 public class UserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;
@@ -26,8 +26,7 @@ public class UserDetailsImpl implements UserDetails {
 
 	private GrantedAuthority authority;
 
-	public UserDetailsImpl(Integer id, String username, String email, String password,
-			GrantedAuthority authorities) {
+	public UserDetailsImpl(Integer id, String username, String email, String password, GrantedAuthority authorities) {
 		this.id = id;
 		this.username = username;
 		this.email = email;
@@ -35,15 +34,14 @@ public class UserDetailsImpl implements UserDetails {
 		this.authority = authorities;
 	}
 
-	public static UserDetailsImpl build(User user) {
+	public UserDetailsImpl(UserEntity user, Role role) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static UserDetailsImpl build(UserEntity user) {
 		GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().getName().name());
 
-		return new UserDetailsImpl(
-				user.getId(),
-				user.getUsername(),
-				user.getEmail(),
-				user.getPassword(),
-				authority);
+		return new UserDetailsImpl(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(), authority);
 	}
 
 	@Override

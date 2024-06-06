@@ -25,23 +25,23 @@ import lombok.ToString;
 @ToString
 public class Quotation {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", nullable = false)
+	private UserEntity userEntity;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "product_id", nullable = false)
+	private Product product;
 
-    @Column(nullable = false)
-    private Double totalAmount;
+	@Column(nullable = false)
+	private Double totalAmount;
 
-    @Column(nullable = false)
-    private Integer quantity;
-    
-    // Constructors, getters, setters, and toString methods
+	@Column(nullable = false)
+	private Integer quantity;
+
+	// Constructors, getters, setters, and toString methods
 }

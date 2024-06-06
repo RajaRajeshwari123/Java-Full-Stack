@@ -12,85 +12,86 @@ import org.springframework.stereotype.Service;
 import com.prodapt.cmsprojectmain.entities.Product;
 import com.prodapt.cmsprojectmain.exceptions.ProductNotFoundException;
 import com.prodapt.cmsprojectmain.repositories.ProductRepository;
+import com.prodapt.cmsprojectmain.utility.QUERYMAPPER;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
-	private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
+	private static final Logger loggers = LoggerFactory.getLogger(ProductServiceImpl.class);
+
 	@Autowired
 	private ProductRepository repo;
-	
-	
+
 	@Override
 	public Product createproduct(Product product) {
-		// TODO Auto-generated method stub
-		
-		
+
 		return repo.save(product);
 	}
 
-
 	@Override
-	public Product getProductById(Long productId) throws  ProductNotFoundException {
+	public Product getProductById(Long productId) throws ProductNotFoundException {
 		Optional<Product> product = repo.findById(productId);
-		if(product.isPresent()) {
-			logger.info("Product "+productId+" exists in record");
+		if (product.isPresent()) {
+			loggers.info(QUERYMAPPER.RECORD_EXITS);
 			return product.get();
-		}else {
-			logger.error("Product "+productId+" doesn't exists");
-			throw new ProductNotFoundException("Product "+productId+"doesn't exists");
+		} else {
+			loggers.error(QUERYMAPPER.RECORD_DOES_NOT_EXITS);
+			throw new ProductNotFoundException(" Product " + productId + " doesn't exists");
 
 		}
 	}
-
 
 	@Override
 	public Product getProductByName(String name) throws ProductNotFoundException {
 		Optional<Product> product = repo.findByName(name);
-		if(product.isPresent()) {
-			logger.info("Product "+ name+" exists in record");
+		if (product.isPresent()) {
+			loggers.info(QUERYMAPPER.RECORD_EXITS);
 			return product.get();
-		}else {
-			logger.error("Product "+name+" doesn't exists");
-			throw new ProductNotFoundException("Product "+name+"doesn't exists");
+		} else {
+			loggers.error(QUERYMAPPER.RECORD_DOES_NOT_EXITS);
+			throw new ProductNotFoundException(" Product " + name + " doesn't exists");
 
 		}
 	}
-	        
+
 	public List<Product> getAllProducts() {
-        logger.info("Fetching all products");
-        List<Product> products = new ArrayList<>();
-        repo.findAll().forEach(products::add);
-        return products;
-    }
+		loggers.info("Fetching all products");
+		List<Product> products = new ArrayList<>();
+		repo.findAll().forEach(products::add);
+		return products;
+	}
 
 	@Override
 	public Product updateProduct(Long id, Product updatedProduct) throws ProductNotFoundException {
-		// TODO Auto-generated method stub
-		
+
 		Optional<Product> existingProductOptional = repo.findById(id);
-        if (existingProductOptional.isPresent()) {
-        	return repo.save(updatedProduct);
-        }
-        else {
-            throw new ProductNotFoundException("Product not found with id: " + id);
-        }
-		       
+		loggers.info(QUERYMAPPER.RECORD_EXITS);
+		if (existingProductOptional.isPresent()) {
+			return repo.save(updatedProduct);
+
+		} else {
+			loggers.error(QUERYMAPPER.RECORD_DOES_NOT_EXITS);
+			throw new ProductNotFoundException("Product not found with id: " + id);
+		}
+
 	}
 
 	@Override
 	public String deleteProductid(Long id) throws ProductNotFoundException {
-		// TODO Auto-generated method stub
-		Optional<Product>deleteproduct=repo.findById(id);
-		if(deleteproduct.isPresent()) {
+		Optional<Product> deleteproduct = repo.findById(id);
+		if (deleteproduct.isPresent()) {
 			repo.deleteById(id);
-			logger.info("Product "+id+" exists in record");
-			return "Product deleted successfully";
-			
-		}else {
-			logger.info("Product "+id+" exists in record");
+			loggers.info(QUERYMAPPER.RECORD_EXITS);
+			return QUERYMAPPER.RECORD_DELETED_SUCCESSFULLY;
+
+		} else {
+			loggers.error(QUERYMAPPER.RECORD_DOES_NOT_EXITS);
 			throw new ProductNotFoundException();
 		}
 	}
-}
 
+	public void setRepo(ProductRepository productRepository) {
+		this.repo = productRepository;
+	}
+
+}

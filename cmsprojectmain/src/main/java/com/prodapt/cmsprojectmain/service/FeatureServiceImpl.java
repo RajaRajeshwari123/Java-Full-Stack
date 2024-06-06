@@ -14,31 +14,31 @@ import com.prodapt.cmsprojectmain.repositories.FeatureRepository;
 @Service
 public class FeatureServiceImpl implements FeatureService {
 
-	private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
+	private static final Logger loggers = LoggerFactory.getLogger(ProductServiceImpl.class);
 	@Autowired
 	private FeatureRepository repo;
+
 	@Override
 	public Features createFeature(Features feature) {
-		// TODO Auto-generated method stub
+
 		return repo.save(feature);
 	}
-	
+
 	@Override
 	public String deleteFeatureById(Long featureId) throws FeatureNotFoundException {
-	    Optional<Features> deletedFeature = repo.findById(featureId);
-	    if (deletedFeature.isPresent()) {
-	        repo.deleteById(featureId);
-	        logger.info("Feature with ID " + featureId + " has been deleted.");
-	        return "Feature deleted sucessfully";
-	    } else {
-	        logger.info("Feature with ID " + featureId + " does not exist in the record.");
-	        throw new FeatureNotFoundException();
-	    }
-	}
-	
-	
-
+		Optional<Features> deletedFeature = repo.findById(featureId);
+		if (deletedFeature.isPresent()) {
+			repo.deleteById(featureId);
+			loggers.info("Feature with ID " + featureId + " has been deleted.");
+			return "Feature deleted sucessfully";
+		} else {
+			loggers.info("Feature with ID " + featureId + " does not exist in the record.");
+			throw new FeatureNotFoundException();
+		}
 	}
 
+	public void setRepo(FeatureRepository featureRepository) {
+		this.repo = featureRepository;
+	}
 
-
+}

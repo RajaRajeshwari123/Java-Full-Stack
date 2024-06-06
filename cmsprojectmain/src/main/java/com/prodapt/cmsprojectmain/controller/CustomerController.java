@@ -15,41 +15,42 @@ import org.springframework.web.bind.annotation.RestController;
 import com.prodapt.cmsprojectmain.entities.Product;
 import com.prodapt.cmsprojectmain.exceptions.ProductNotFoundException;
 import com.prodapt.cmsprojectmain.service.ProductService;
+import com.prodapt.cmsprojectmain.utility.QUERYMAPPER;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Setter
+@Getter
 @RestController
 @RequestMapping("/api/v1/customer")
-@Tag(name="InternetService Customer API")
+@Tag(name = "InternetService Customer API")
 public class CustomerController {
 
-    private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
+	private static final Logger loggers = LoggerFactory.getLogger(CustomerController.class);
 
-    @Autowired
-    private ProductService productService;
+	@Autowired
+	ProductService productService;
 
-    @Operation(summary = "Get Product By Name")
-    @GetMapping("/getproductbyname")
-    public ResponseEntity<?> getProductByName(@RequestParam("name") String name) {
-        logger.info("Inside getProductByName " + CustomerController.class.getName());
-        try {
-            Product product = productService.getProductByName(name);
-            logger.info("Call to service layer method is success");
-            return new ResponseEntity<Product>(product, HttpStatus.OK);
-        } catch (ProductNotFoundException ex) {
-            logger.error("ProductNotFoundException: " + ex.getMessage());
-            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.NOT_FOUND);
-        }
-    }
+	@Operation(summary = "Get Product By Name")
+	@GetMapping("/getproductbyname")
+	public ResponseEntity<Product> getProductByName(@RequestParam("name") String name) throws ProductNotFoundException {
+		loggers.info("Inside getProductByName " + CustomerController.class.getName());
+		Product product = productService.getProductByName(name);
+		loggers.info("Call to service layer method is success");
+		loggers.info(QUERYMAPPER.RECORD_EXITS);
+		return new ResponseEntity<>(product, HttpStatus.OK);
+	}
 
-    @Operation(summary = "Get All Products")
-    @GetMapping("/getallproducts")
-    public ResponseEntity<?> getAllProducts() {
-        logger.info("Inside getAllProducts " + CustomerController.class.getName());
-        List<Product> products = productService.getAllProducts();
-        logger.info("Call to service layer method is success");
-        return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
-    }
+	@Operation(summary = "Get All Products")
+	@GetMapping("/getallproducts")
+	public ResponseEntity<List<Product>> getAllProducts() {
+		loggers.info("Inside getAllProducts " + CustomerController.class.getName());
+		List<Product> products = productService.getAllProducts();
+		loggers.info("Call to service layer method is success");
+		loggers.info(QUERYMAPPER.RECORD_EXITS);
+		return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
+	}
 }

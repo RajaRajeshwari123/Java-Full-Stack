@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.prodapt.cmsprojectmain.entities.Parameter;
 import com.prodapt.cmsprojectmain.exceptions.ParameterNotFoundException;
 import com.prodapt.cmsprojectmain.repositories.ParameterRepository;
+import com.prodapt.cmsprojectmain.utility.QUERYMAPPER;
 
 @Service
 @Transactional
@@ -19,7 +20,7 @@ public class ParameterServiceImpl implements ParameterService {
     @Autowired
     private ParameterRepository repo;
     
-    private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
+    private static final Logger loggers= LoggerFactory.getLogger(ParameterServiceImpl.class);
 
     @Override
     public Parameter createParameter(Parameter parameter) {
@@ -31,16 +32,19 @@ public class ParameterServiceImpl implements ParameterService {
 		Optional<Parameter>deleteparameter=repo.findById(parameterId);
 		if(deleteparameter.isPresent()) {
 			repo.deleteById(parameterId);
-			logger.info("Parameter "+parameterId+" exists in record");
+			loggers.info(QUERYMAPPER.RECORD_EXITS);
 			return "Parameter deleted sucessfully";
 			
 		}else {
-			logger.info("Parameter "+parameterId+" exists in record");
+			loggers.error(QUERYMAPPER.RECORD_DOES_NOT_EXITS);
 			throw new ParameterNotFoundException();
 		}
 	}
 		
-		
+	public void setRepo(ParameterRepository parameterRepository) {
+	    this.repo = parameterRepository;
+	}
+
 		
 	}
 

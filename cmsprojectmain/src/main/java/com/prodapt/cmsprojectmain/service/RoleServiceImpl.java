@@ -25,6 +25,9 @@ public class RoleServiceImpl implements RoleService {
 		Optional<Role> role= repo.findById(id);
 		return role;
 	}
+	public void setRepo(RoleRepository roleRepository) {
+	    this.repo = roleRepository;
+	}
 	
 	
 

@@ -90,8 +90,24 @@
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>2.5.0</version>
 		</dependency>
-
-    
+	<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.10.2</version>
+			<scope>test</scope>
+		</dependency>
+    <dependency>
+<groupId>org.mockito</groupId>
+<artifactId>mockito-core</artifactId>
+<version>5.11.0</version>
+<scope>test</scope>
+</dependency>
+  	<dependency>
+  		<groupId>com.prodapt</groupId>
+  		<artifactId>junitexample</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
 	</dependencies>
 
 	<build>
@@ -106,6 +122,58 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.2.5</version>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.12</version>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>post-unit-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<!-- Sets the path to the file which contains the
+							execution data. -->
+
+							<dataFile>target/jacoco.exec</dataFile>
+							<!-- Sets the output directory for the code coverage
+							report. -->
+							<outputDirectory>target/jacoco-ut</outputDirectory>
+							<excludes>
+								<exclude>com/prodapt/cmsprojectmain/entities/**</exclude>
+								<exclude>com/prodapt/cmsprojectmain/exceptions/**</exclude>
+								<exclude>**/*CmsprojectmainApplication.class</exclude>
+								<exclude>com/prodapt/cmsprojectmain/security/**</exclude>
+								<exclude>com/prodapt/cmsprojectmain/dto/**</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<systemPropertyVariables>
+						<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 		</plugins>
