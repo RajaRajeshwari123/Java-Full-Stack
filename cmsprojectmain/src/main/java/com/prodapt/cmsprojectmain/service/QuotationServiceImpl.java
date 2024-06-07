@@ -22,8 +22,6 @@ public class QuotationServiceImpl implements QuotationService {
     public Quotation getQuotationById(Long id) throws QuotationNotFoundException {
         return quotationRepository.findById(id).orElseThrow(() -> new QuotationNotFoundException("Quotation not found"));
     }
-    public void setQuotationRepository(QuotationRepository quotationRepository) {
-        this.quotationRepository = quotationRepository;
-    }
+   
 
 }

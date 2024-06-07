@@ -40,12 +40,7 @@ public class ParameterServiceImpl implements ParameterService {
 			throw new ParameterNotFoundException();
 		}
 	}
-		
-	public void setRepo(ParameterRepository parameterRepository) {
-	    this.repo = parameterRepository;
-	}
-
-		
+			
 	}
 
 

@@ -65,8 +65,10 @@ public class ProductServiceImpl implements ProductService {
 	public Product updateProduct(Long id, Product updatedProduct) throws ProductNotFoundException {
 
 		Optional<Product> existingProductOptional = repo.findById(id);
-		loggers.info(QUERYMAPPER.RECORD_EXITS);
+		
 		if (existingProductOptional.isPresent()) {
+			repo.findById(id);
+			loggers.info(QUERYMAPPER.RECORD_EXITS);
 			return repo.save(updatedProduct);
 
 		} else {
@@ -88,10 +90,6 @@ public class ProductServiceImpl implements ProductService {
 			loggers.error(QUERYMAPPER.RECORD_DOES_NOT_EXITS);
 			throw new ProductNotFoundException();
 		}
-	}
-
-	public void setRepo(ProductRepository productRepository) {
-		this.repo = productRepository;
 	}
 
 }

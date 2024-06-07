@@ -22,8 +22,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
-@Getter
+
 @RestController
 @RequestMapping("/api/v1/customer")
 @Tag(name = "InternetService Customer API")

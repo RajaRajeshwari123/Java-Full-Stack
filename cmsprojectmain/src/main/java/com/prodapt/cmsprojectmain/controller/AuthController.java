@@ -35,8 +35,6 @@ import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
  
-@Getter
-@Setter
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin(origins = "*", maxAge = 3600)

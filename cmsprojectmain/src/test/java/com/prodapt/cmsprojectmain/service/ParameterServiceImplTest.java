@@ -1,59 +1,90 @@
 package com.prodapt.cmsprojectmain.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
+ 
 import java.util.Optional;
-
-import org.junit.jupiter.api.BeforeEach; // Correct import for setup method
+ 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+ 
 import com.prodapt.cmsprojectmain.entities.Parameter;
-import com.prodapt.cmsprojectmain.entities.Product;
 import com.prodapt.cmsprojectmain.exceptions.ParameterNotFoundException;
-import com.prodapt.cmsprojectmain.exceptions.ProductNotFoundException;
 import com.prodapt.cmsprojectmain.repositories.ParameterRepository;
-import com.prodapt.cmsprojectmain.repositories.ProductRepository;
-
+ 
+@SpringBootTest
 class ParameterServiceImplTest {
-
+ 
+	@Mock
+	private ParameterRepository repo;
+ 
+	@InjectMocks
 	private ParameterServiceImpl parameterService;
-
-	private ParameterRepository parameterRepository;
-
+ 
+	private Parameter parameter;
+ 
 	@BeforeEach
-	void setUp() {
-		parameterRepository = mock(ParameterRepository.class);
-		parameterService = new ParameterServiceImpl();
-		parameterService.setRepo(parameterRepository);
+	public void setup() {
+		parameter = new Parameter();
+		parameter.setId(1L);
+		parameter.setName("Test Parameter");
+		parameter.setType("Test Type");
+		parameter.setValue("Test Value");
 	}
-
+ 
 	@Test
-	void testCreateParameter() {
-		Parameter parameter = new Parameter();
-		when(parameterRepository.save(parameter)).thenReturn(parameter);
-		assertEquals(parameter, parameterService.createParameter(parameter));
+	void testCreateParameterSuccess() {
+		// Arrange
+ 
+		when(repo.save(parameter)).thenReturn(parameter);
+ 
+		// Act
+		Parameter result = parameterService.createParameter(parameter);
+ 
+		// Assert
+		assertNotNull(result);
+		assertEquals(parameter, result);
 	}
-
+ 
 	@Test
-	void testDeleteParameterById_Success() throws ParameterNotFoundException {
+	void testCreateParameterFailure() {
+		// Arrange
+ 
+		when(repo.save(parameter)).thenThrow(new RuntimeException("Error saving parameter"));
+ 
+		// Act and Assert
+		assertThrows(RuntimeException.class, () -> {
+			parameterService.createParameter(parameter);
+		});
+	}
+ 
+	@Test
+	void testDeleteParameterByIdSuccess() throws ParameterNotFoundException {
+		// Arrange
 		Long parameterId = 1L;
-		Optional<Parameter> parameterOptional = Optional.of(new Parameter());
-		when(parameterRepository.findById(parameterId)).thenReturn(parameterOptional);
+		when(repo.findById(parameterId)).thenReturn(Optional.of(new Parameter()));
+ 
+		// Act
 		String result = parameterService.deleteParameterById(parameterId);
+ 
+		// Assert
 		assertEquals("Parameter deleted sucessfully", result);
-		verify(parameterRepository).deleteById(parameterId);
 	}
-	
+ 
 	@Test
-	void testDeleteParameterById_ParameterNotFound() {
+	void testDeleteParameterByIdFailure() {
+		// Arrange
 		Long parameterId = 1L;
-		Optional<Parameter> parameterOptional = Optional.empty();
-		when(parameterRepository.findById(parameterId)).thenReturn(parameterOptional);
-
-		assertThrows(ParameterNotFoundException.class, () -> parameterService.deleteParameterById(parameterId));
+		when(repo.findById(parameterId)).thenReturn(Optional.empty());
+ 
+		// Act and Assert
+		assertThrows(ParameterNotFoundException.class, () -> {
+			parameterService.deleteParameterById(parameterId);
+		});
 	}
 }

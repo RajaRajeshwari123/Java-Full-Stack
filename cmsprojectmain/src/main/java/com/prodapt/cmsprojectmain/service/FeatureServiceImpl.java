@@ -30,15 +30,11 @@ public class FeatureServiceImpl implements FeatureService {
 		if (deletedFeature.isPresent()) {
 			repo.deleteById(featureId);
 			loggers.info("Feature with ID " + featureId + " has been deleted.");
-			return "Feature deleted sucessfully";
+			return "Feature deleted successfully";
 		} else {
 			loggers.info("Feature with ID " + featureId + " does not exist in the record.");
 			throw new FeatureNotFoundException();
 		}
-	}
-
-	public void setRepo(FeatureRepository featureRepository) {
-		this.repo = featureRepository;
 	}
 
 }

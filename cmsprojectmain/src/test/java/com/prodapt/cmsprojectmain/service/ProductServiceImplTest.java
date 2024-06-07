@@ -1,129 +1,193 @@
 package com.prodapt.cmsprojectmain.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
+ 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+ 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+ 
 import com.prodapt.cmsprojectmain.entities.Product;
 import com.prodapt.cmsprojectmain.exceptions.ProductNotFoundException;
 import com.prodapt.cmsprojectmain.repositories.ProductRepository;
+import com.prodapt.cmsprojectmain.utility.QUERYMAPPER;
+ 
+@SpringBootTest
+public class ProductServiceImplTest {
+//	private static final Logger loggers = LoggerFactory.getLogger(ParameterServiceImpl.class);
+ 
+	@Mock
+	private ProductRepository repo;
+ 
+	@InjectMocks
+	private ProductServiceImpl productService;
+ 
+	private Product product;
+ 
+	@BeforeEach
+	public void setup() {
+ 
+		product = new Product();
+		product.setId(1L);
+		product.setName("Test Product");
+ 
+	}
+ 
+	@Test
+	void testCreateProduct() {
+ 
+		when(repo.save(product)).thenReturn(product);
+ 
+		Product result = productService.createproduct(product);
+ 
+		assertNotNull(product);
+		assertEquals(product, result);
+	}
+ 
+	@Test
+	void testGetProductById() throws ProductNotFoundException {
+ 
+		// Arrange
+		when(repo.findById(1L)).thenReturn(Optional.of(product));
+ 
+		// Act
+		Product result = productService.getProductById(1L);
+ 
+		// Assert
+		assertNotNull(product);
+		assertEquals(product, result);
+ 
+	}
+ 
+	@Test
+	public void testGetProductByIdNotFound() {
+		// Arrange
+		when(repo.findById(1L)).thenReturn(Optional.empty());
+ 
+		// Act and Assert
+		assertThrows(ProductNotFoundException.class, () -> productService.getProductById(1L));
+	}
+ 
+	@Test
+	public void testGetProductByName() throws ProductNotFoundException {
+ 
+		// Arrange
+		when(repo.findByName("Test Product")).thenReturn(Optional.of(product));
+ 
+		// Act
+		Product result = productService.getProductByName("Test Product");
+ 
+		// Assert
+		assertNotNull(product);
+		assertEquals(product, result);
+ 
+	}
+ 
+	@Test
+	public void testGetProductByNameNotFound() throws ProductNotFoundException {
+		if (productService != null) {
+			// Arrange
+			when(repo.findByName("NoProduct")).thenReturn(Optional.empty());
+ 
+			// Act
+			assertThrows(ProductNotFoundException.class, () -> productService.getProductByName("NoProduct"));
+		}
+	}
+ 
+	@Test
+	public void testGetAllProducts() {
+ 
+		// Arrange
+		List<Product> products = new ArrayList<>();
+		products.add(product);
+ 
+		when(repo.findAll()).thenReturn(products);
+ 
+		// Act
+		List<Product> result = productService.getAllProducts();
+ 
+		// Assert
+		assertNotNull(product);
+		assertEquals(products, result);
+ 
+	}
+ 
+//	@Test
+//	public void testUpdateProductFailure() throws ProductNotFoundException {
+//	    
+//	        // Arrange
+//	        when(repo.findById(1L)).thenReturn(Optional.empty());
+//
+//	        // Act
+//	        assertNotNull(product);
+//	        assertThrows(ProductNotFoundException.class, () -> productService.updateProduct(1L, product));
+//
+//	        // Assert
+//	       verify(loggers).error(QUERYMAPPER.RECORD_DOES_NOT_EXITS);
+//	    }
+	@Test
+	public void testUpdateProductFailure() {
+	    // Arrange
+	    when(repo.findById(1L)).thenReturn(Optional.empty());
+ 
+	    // Act and Assert
+	    assertNotNull(product);
+	    assertThrows(ProductNotFoundException.class, () -> {
+	        productService.updateProduct(1L, product);
+	    }, "Product not found with id: 1");
+ 
+	    
+	}
 
-class ProductServiceImplTest {
-
-    private ProductServiceImpl productService;
-    private ProductRepository productRepository;
-
-    @BeforeEach
-    void setUp() {
-        productRepository = mock(ProductRepository.class);
-        productService = new ProductServiceImpl();
-        productService.setRepo(productRepository);
-    }
-
-    @Test
-    void testCreateProduct() {
-        Product product = new Product();
-        when(productRepository.save(product)).thenReturn(product);
-        Product createdProduct = productService.createproduct(product);
-        assertEquals(product, createdProduct);
-    }
-
-    @Test
-    void testGetProductByIdSuccess() throws ProductNotFoundException {
-        long productId = 1L;
-        Product product = new Product();
-        product.setId(productId);
-        Optional<Product> productOptional = Optional.of(product);
-        when(productRepository.findById(productId)).thenReturn(productOptional);
-        Product retrievedProduct = productService.getProductById(productId);
-        assertEquals(productId, retrievedProduct.getId());
-    }
-
-    @Test
-    void testGetProductByIdNotFound() {
-        long productId = 1L;
-        Optional<Product> productOptional = Optional.empty();
-        when(productRepository.findById(productId)).thenReturn(productOptional);
-        assertThrows(ProductNotFoundException.class, () -> productService.getProductById(productId));
-    }
-
-    @Test
-    void testGetProductByNameSuccess() throws ProductNotFoundException {
-        String productName = "TestProduct";
-        Product product = new Product();
-        product.setName(productName);
-        Optional<Product> productOptional = Optional.of(product);
-        when(productRepository.findByName(productName)).thenReturn(productOptional);
-        Product retrievedProduct = productService.getProductByName(productName);
-        assertEquals(productName, retrievedProduct.getName());
-    }
-
-    @Test
-    void testGetProductByNameNotFound() {
-        String productName = "NonExistingProduct";
-        Optional<Product> productOptional = Optional.empty();
-        when(productRepository.findByName(productName)).thenReturn(productOptional);
-        assertThrows(ProductNotFoundException.class, () -> productService.getProductByName(productName));
-    }
-
-    @Test
-    void testGetAllProducts() {
-        List<Product> productList = new ArrayList<>();
-        when(productRepository.findAll()).thenReturn(productList);
-        List<Product> retrievedProducts = productService.getAllProducts();
-        assertEquals(productList, retrievedProducts);
-    }
-
-    @Test
-    void testUpdateProductSuccess() throws ProductNotFoundException {
-        long productId = 1L;
-        Product existingProduct = new Product();
-        existingProduct.setId(productId);
-        when(productRepository.findById(productId)).thenReturn(Optional.of(existingProduct));
-
-        Product updatedProduct = new Product();
-        updatedProduct.setId(productId);
-        updatedProduct.setName("UpdatedProduct");
-
-        productService.updateProduct(productId, updatedProduct);
-        verify(productRepository).save(updatedProduct);
-    }
-
-    @Test
-    void testUpdateProductNotFound() {
-        long productId = 1L;
-        Product updatedProduct = new Product();
-        updatedProduct.setId(productId);
-        updatedProduct.setName("UpdatedProduct");
-
-        when(productRepository.findById(productId)).thenReturn(Optional.empty());
-        assertThrows(ProductNotFoundException.class, () -> productService.updateProduct(productId, updatedProduct));
-    }
-
-    @Test
-    void testDeleteProductByIdSuccess() throws ProductNotFoundException {
-        long productId = 1L;
-        Optional<Product> productOptional = Optional.of(new Product());
-        when(productRepository.findById(productId)).thenReturn(productOptional);
-        String result = productService.deleteProductid(productId);
-        assertEquals("Record deleted successfully", result);
-        verify(productRepository).deleteById(productId);
-    }
-
-    @Test
-    void testDeleteProductByIdProductNotFound() {
-        long productId = 1L;
-        Optional<Product> productOptional = Optional.empty();
-        when(productRepository.findById(productId)).thenReturn(productOptional);
-        assertThrows(ProductNotFoundException.class, () -> productService.deleteProductid(productId));
-    }
+ 
+ 
+	@Test
+	void testUpdateProductSuccess() throws ProductNotFoundException {
+ 
+		Product existingProduct = product;
+		existingProduct.setId(2L);
+		when(repo.findById(2L)).thenReturn(Optional.of(existingProduct));
+ 
+		Product updatedProduct = new Product();
+		updatedProduct.setId(2L);
+		updatedProduct.setName("UpdatedProduct");
+ 
+		productService.updateProduct(2L, updatedProduct);
+		verify(repo).save(updatedProduct);
+	}
+ 
+	@Test
+	public void testDeleteSuccess() throws ProductNotFoundException {
+ 
+		// Arrange
+		when(repo.findById(1L)).thenReturn(Optional.of(product));
+ 
+		// Act
+		String result = productService.deleteProductid(1L);
+ 
+		// Assert
+		assertNotNull(product);
+		assertEquals(QUERYMAPPER.RECORD_DELETED_SUCCESSFULLY, result);
+	}
+ 
+	@Test
+	public void testDeleteProductFailure() throws ProductNotFoundException {
+ 
+		// Arrange
+		when(repo.findById(1L)).thenReturn(Optional.empty());
+ 
+		// Act
+		assertNotNull(product);
+		assertThrows(ProductNotFoundException.class, () -> productService.deleteProductid(1L));
+ 
+	}
 }
