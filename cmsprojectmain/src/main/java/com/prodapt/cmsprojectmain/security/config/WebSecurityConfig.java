@@ -55,11 +55,12 @@ public class WebSecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 
-	public final static String[] PUBLIC_REQUEST_MATCHERS = { "/api/auth/**","/api-docs/**", "/swagger-ui/**","/v3/api-docs/**" };
+	public final static String[] PUBLIC_REQUEST_MATCHERS = { "/api/auth/**","/api/test/all","/api-docs/**", "/swagger-ui/**","/v3/api-docs/**" };
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.cors(AbstractHttpConfigurer :: disable).csrf(AbstractHttpConfigurer::disable)
+		//http.cors(AbstractHttpConfigurer :: disable)
+		http.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(req -> req.requestMatchers(PUBLIC_REQUEST_MATCHERS).permitAll()
 						.requestMatchers("/api/v1/customer/**").hasRole("CUSTOMER")
 						.requestMatchers("/api/v1/manager/**").hasRole("MANAGER")

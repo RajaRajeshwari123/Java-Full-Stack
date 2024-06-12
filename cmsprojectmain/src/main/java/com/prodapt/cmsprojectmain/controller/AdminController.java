@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -35,6 +36,7 @@ import lombok.Setter;
 
 @RestController
 @RequestMapping("/api/v1/admin")
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Tag(name = "InternetService Admin API")
 public class AdminController {
 
@@ -52,24 +54,27 @@ public class AdminController {
 	@Operation(summary = "Create Product in APP")
 	@PostMapping("/addproduct")
 	public ResponseEntity<Product> addProduct(@RequestBody Product product) {
+		loggers.info("Inside addProduct " + AdminController.class.getName());
 		Product prd = productService.createproduct(product);
+		 loggers.info("Call to service layer method is success");
 		return new ResponseEntity<Product>(prd, HttpStatus.CREATED);
 	}
 
 	@Operation(summary = "Create Feature in APP")
 	@PostMapping("/addfeature")
 	public ResponseEntity<Features> addFeature(@RequestBody Features feature) {
-
+		 loggers.info("Inside addFeatures " + AdminController.class.getName());
 		Features features = featureService.createFeature(feature);
-
+		loggers.info("Call to service layer method is success");
 		return new ResponseEntity<Features>(features, HttpStatus.CREATED);
 	}
 
 	@Operation(summary = "Get Products By id")
 	@GetMapping("/getproductsbyId")
 	public ResponseEntity<Product> getProductById(@RequestParam("id") Long productId) throws ProductNotFoundException {
-
+		loggers.info("Inside getProductById " + AdminController.class.getName());
 		Product product = productService.getProductById(productId);
+		loggers.info("Call to service layer method is success");
 		return new ResponseEntity<Product>(product, HttpStatus.OK);
 
 	}
@@ -77,9 +82,9 @@ public class AdminController {
 	@Operation(summary = "Get Products By name")
 	@GetMapping("/getproductsbyName")
 	public ResponseEntity<Product> getProductByName(@RequestParam("name") String name) throws ProductNotFoundException {
-
+		loggers.info("Inside getProductByName " + AdminController.class.getName());
 		Product product = productService.getProductByName(name);
-
+		loggers.info("Call to service layer method is success");
 		return new ResponseEntity<Product>(product, HttpStatus.OK);
 
 	}
@@ -87,7 +92,9 @@ public class AdminController {
 	@Operation(summary = "Get All Products")
 	@GetMapping("/getallproducts")
 	public ResponseEntity<List<Product>> getAllProducts() {
+		loggers.info("Inside getAllProducts " + AdminController.class.getName());
 		List<Product> products = productService.getAllProducts();
+		loggers.info("Call to service layer method is success");
 		return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
 	}
 
@@ -95,27 +102,29 @@ public class AdminController {
 	@PutMapping("/updateproduct")
 	public ResponseEntity<Product> updateProduct(@RequestParam("id") Long id, @RequestBody Product product)
 			throws ProductNotFoundException {
-
+		loggers.info("Inside updateProduct " + AdminController.class.getName());
 		Product updatedProduct = productService.updateProduct(id, product);
+		loggers.info("Call to service layer method is success");
 		return new ResponseEntity<Product>(updatedProduct, HttpStatus.OK);
 
 	}
 
 	@Operation(summary = "Delete Product By Id")
 	@PostMapping("/deleteproductbyid")
-	public ResponseEntity<String> deleteProductById(@RequestParam("productId") Long productId)
+	public ResponseEntity<String> deleteProductById(@RequestBody Long productId)
 			throws ProductNotFoundException {
-
+		 loggers.info("Inside DeleteProductById " + AdminController.class.getName());
 		String deleteproduct = productService.deleteProductid(productId);
+		loggers.info("Call to service layer method is success");
 		return new ResponseEntity<String>(deleteproduct, HttpStatus.OK);
 
 	}
 
 	@Operation(summary = "Delete Feature By Id")
 	@PostMapping("/deletefeaturebyid")
-	public ResponseEntity<String> deleteFeatureById(@RequestParam("featureId") Long featureId)
+	public ResponseEntity<String> deleteFeatureById(@RequestBody Long featureId)
 			throws FeatureNotFoundException {
-
+		loggers.info("Inside DeleteFeatureById " + AdminController.class.getName());
 		String deletefeature = featureService.deleteFeatureById(featureId);
 		loggers.info("Call to service layer method is success");
 		return new ResponseEntity<String>(deletefeature, HttpStatus.OK);
@@ -124,10 +133,11 @@ public class AdminController {
 
 	@Operation(summary = "Delete Parameter By Id")
 	@PostMapping("/deleteparameterbyid")
-	public ResponseEntity<String> deleteParameterById(@RequestParam("parameterId") Long parameterId)
+	public ResponseEntity<String> deleteParameterById(@RequestBody Long parameterId)
 			throws ParameterNotFoundException {
-
+		loggers.info("Inside DeleteParameterById " + AdminController.class.getName());
 		String deleteparameter = parameterService.deleteParameterById(parameterId);
+		loggers.info("Call to service layer method is success");
 		return new ResponseEntity<String>(deleteparameter, HttpStatus.OK);
 
 	}
