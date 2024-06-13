@@ -72,85 +72,67 @@ const App = () => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-gradient-primary">
         <Link to={"/"} className="navbar-brand">
-          bezKoder
+          CMS Project
         </Link>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item">
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <div className="navbar-nav mr-auto">
             <Link to={"/home"} className="nav-link">
               Home
             </Link>
-          </li>
 
-          {/* {showModeratorBoard && (
-            <li className="nav-item">
-              <Link to={"/mod"} className="nav-link">
-                Moderator Board
-              </Link>
-            </li>
-          )} */}
-
-          {showAdminBoard && (
-            <li className="nav-item">
-              <Link to={"/admin"} className="nav-link">
-                Admin Board
-              </Link>
-            </li>
-          )}
             {showManagerBoard && (
-            <li className="nav-item">
               <Link to={"/manager"} className="nav-link">
                 Manager Board
               </Link>
-            </li>
-          )}
-           {showUserBoard && (
-            <li className="nav-item">
+            )}
+
+            {showAdminBoard && (
+              <Link to={"/admin"} className="nav-link">
+                Admin Board
+              </Link>
+            )}
+
+            {showUserBoard && (
               <Link to={"/customer"} className="nav-link">
                 User Board
               </Link>
-            </li>
-          )}
+            )}
+          </div>
 
-
-          {/* {showUserBoard && (
-            <li className="nav-item">
-              <Link to={"/user"} className="nav-link">
-                User
-              </Link>
-            </li>
-          )} */}
-        </div>
-
-        {currentUser ? (
-          <div className="navbar-nav ml-auto">
-            <li className="nav-item">
+          {currentUser ? (
+            <div className="navbar-nav ml-auto">
               <Link to={"/profile"} className="nav-link">
                 {currentUser.username}
               </Link>
-            </li>
-            <li className="nav-item">
-              <a href="/login" className="nav-link" onClick={logOut}>
+              <Link to={"/login"} className="nav-link" onClick={logOut}>
                 LogOut
-              </a>
-            </li>
-          </div>
-        ) : (
-          <div className="navbar-nav ml-auto">
-            <li className="nav-item">
+              </Link>
+            </div>
+          ) : (
+            <div className="navbar-nav ml-auto">
               <Link to={"/login"} className="nav-link">
                 Login
               </Link>
-            </li>
 
-            <li className="nav-item">
               <Link to={"/register"} className="nav-link">
                 Sign Up
               </Link>
-            </li>
-          </div>
-        )}
+            </div>
+          )}
+        </div>
       </nav>
 
       <div className="container mt-3">

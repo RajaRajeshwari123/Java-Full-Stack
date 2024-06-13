@@ -42,24 +42,33 @@ const UpdateProductForm = () => {
   };
 
   return (
-    <div className="container">
-      <h2 className="mt-4">Update Product</h2>
-      <form onSubmit={handleFormSubmit}>
-        <label htmlFor="productId">Enter Product ID:</label>
-        <input 
-          type="text" 
-          id="productId" 
-          value={productId} 
-          onChange={handleProductIdChange} 
-          required 
-        />
-        <button type="submit">Get Product Details</button>
-      </form>
-      {error && <p className="mt-4 text-danger">Error: {error}</p>}
-      {responseMessage && <p className="mt-4">{responseMessage}</p>}
-      {showUpdateForm && product && (
-        <UpdateProduct product={product} onProductUpdate={handleProductUpdate} />
-      )}
+    <div className="container mt-5">
+      <div className="card">
+        <div className="card-header">
+          <h3 className="mb-0">Update Product</h3>
+        </div>
+        <div className="card-body">
+          <form onSubmit={handleFormSubmit}>
+            <div className="mb-3">
+              <label htmlFor="productId" className="form-label">Enter Product ID:</label>
+              <input 
+                type="text" 
+                id="productId" 
+                value={productId} 
+                onChange={handleProductIdChange} 
+                required 
+                className="form-control"
+              />
+            </div>
+            <button type="submit" className="btn btn-primary">Get Product Details</button>
+          </form>
+          {error && <p className="mt-4 text-danger">Error: {error}</p>}
+          {responseMessage && <p className="mt-4">{responseMessage}</p>}
+          {showUpdateForm && product && (
+            <UpdateProduct product={product} onProductUpdate={handleProductUpdate} />
+          )}
+        </div>
+      </div>
     </div>
   );
 };

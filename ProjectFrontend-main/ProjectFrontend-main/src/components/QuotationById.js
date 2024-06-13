@@ -29,36 +29,42 @@ const QuotationById = () => {
   };
 
   return (
-    <div className="container">
-      <h2 className="mt-4">View Quotation By ID</h2>
-      <div className="input-group mb-3">
-        <input
-          type="number"
-          className="form-control"
-          placeholder="Enter quotation ID"
-          value={quotationId}
-          onChange={(e) => setQuotationId(e.target.value)}
-        />
-        <div className="input-group-append">
-          <button
-            className="btn btn-outline-secondary"
-            type="button"
-            onClick={getQuotationById}
-          >
-            View Quotation
-          </button>
+    <div className="container mt-5">
+      <div className="card">
+        <div className="card-header">
+          <h2 className="mb-0">View Quotation By ID</h2>
+        </div>
+        <div className="card-body">
+          <div className="input-group mb-3">
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Enter quotation ID"
+              value={quotationId}
+              onChange={(e) => setQuotationId(e.target.value)}
+            />
+            <div className="input-group-append">
+              <button
+                className="btn btn-outline-secondary"
+                type="button"
+                onClick={getQuotationById}
+              >
+                View Quotation
+              </button>
+            </div>
+          </div>
+          {error && <p className="mt-4 text-danger">{error}</p>}
+          {quotation && (
+            <div>
+              <h3>Quotation ID: {quotation.id}</h3>
+              <p>User ID: {quotation.userId}</p>
+              <p>Product ID: {quotation.productId}</p>
+              <p>Total Amount: {quotation.totalAmount}</p>
+              <p>Quantity: {quotation.quantity}</p>
+            </div>
+          )}
         </div>
       </div>
-      {error && <p className="mt-4 text-danger"> {error}</p>}
-      {quotation && (
-        <div>
-          <h3>Quotation ID: {quotation.id}</h3>
-          <p>User ID: {quotation.userId}</p>
-          <p>Product ID: {quotation.productId}</p>
-          <p>Total Amount: {quotation.totalAmount}</p>
-          <p>Quantity: {quotation.quantity}</p>
-        </div>
-      )}
     </div>
   );
 };

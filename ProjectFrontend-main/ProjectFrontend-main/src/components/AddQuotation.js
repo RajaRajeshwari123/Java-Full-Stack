@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import UserService from "../services/user.service";
- 
+
 const AddQuotation = () => {
   const [formData, setFormData] = useState({
     id: 0,
@@ -11,7 +11,7 @@ const AddQuotation = () => {
   });
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
- 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -19,84 +19,89 @@ const AddQuotation = () => {
       [name]: value,
     }));
   };
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        await UserService.AddQuotation(formData);
-        setSuccess(true);
-        setError(null);
-      } catch (error) {
-        console.error("Error adding quotation:", error);
-        if ((error.response && error.response.status === 404) || (error.response && error.response.status === 500)) {
-          setError("Product or user ID is invalid.");
-        } else {
-          setError("Error adding quotation.");
-        }
+      await UserService.AddQuotation(formData);
+      setSuccess(true);
+      setError(null);
+    } catch (error) {
+      console.error("Error adding quotation:", error);
+      if ((error.response && error.response.status === 404) || (error.response && error.response.status === 500)) {
+        setError("Product or user ID is invalid.");
+      } else {
+        setError("Error adding quotation.");
       }
-     
+    }
   };
- 
+
   return (
-    <div className="container">
-      <h2 className="mt-4">Add Quotation</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="userId">User ID:</label>
-          <input
-            type="number"
-            className="form-control"
-            id="userId"
-            name="userId"
-            value={formData.userId}
-            onChange={handleChange}
-            required
-          />
+    <div className="container mt-5">
+      <div className="card">
+        <div className="card-header">
+          <h3 className="mb-0">Add Quotation</h3>
         </div>
-        <div className="form-group">
-          <label htmlFor="productId">Product ID:</label>
-          <input
-            type="number"
-            className="form-control"
-            id="productId"
-            name="productId"
-            value={formData.productId}
-            onChange={handleChange}
-            required
-          />
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="userId">User ID:</label>
+              <input
+                type="number"
+                className="form-control"
+                id="userId"
+                name="userId"
+                value={formData.userId}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="productId">Product ID:</label>
+              <input
+                type="number"
+                className="form-control"
+                id="productId"
+                name="productId"
+                value={formData.productId}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="totalAmount">Total Amount:</label>
+              <input
+                type="number"
+                className="form-control"
+                id="totalAmount"
+                name="totalAmount"
+                value={formData.totalAmount}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="quantity">Quantity:</label>
+              <input
+                type="number"
+                className="form-control"
+                id="quantity"
+                name="quantity"
+                value={formData.quantity}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Add Quotation
+            </button>
+          </form>
+          {error && <p className="text-danger mt-3">{error}</p>}
+          {success && <p className="text-success mt-3">Quotation added successfully.</p>}
         </div>
-        <div className="form-group">
-          <label htmlFor="totalAmount">Total Amount:</label>
-          <input
-            type="number"
-            className="form-control"
-            id="totalAmount"
-            name="totalAmount"
-            value={formData.totalAmount}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="quantity">Quantity:</label>
-          <input
-            type="number"
-            className="form-control"
-            id="quantity"
-            name="quantity"
-            value={formData.quantity}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Add Quotation
-        </button>
-      </form>
-      {error && <p className="text-danger mt-3">{error}</p>}
-      {success && <p className="text-success mt-3">Quotation added successfully.</p>}
+      </div>
     </div>
   );
 };
- 
+
 export default AddQuotation;

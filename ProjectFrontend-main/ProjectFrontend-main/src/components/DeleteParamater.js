@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import UserService from "../services/user.service";
+// import "./Addproduct.css"; // Import your CSS file if needed
 
 const DeleteParameter = () => {
   const [paramId, setParamId] = useState('');
@@ -20,21 +21,27 @@ const DeleteParameter = () => {
   };
 
   return (
-    <div className="container">
-      <h2 className="mt-4">Delete Parameter</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="paramId" className="form-label">Parameter ID:</label>
-          <input type="number" id="paramId" className="form-control" value={paramId} onChange={(e) => setParamId(e.target.value)} required />
+    <div className="container mt-5">
+      <div className="card">
+        <div className="card-header">
+          <h3 className="mb-0">Delete Parameter</h3>
         </div>
-        <button type="submit" className="btn btn-danger">Delete Parameter</button>
-      </form>
-      {success && (
-        <div className="mt-4">
-          <p className="text-success">Parameter deleted successfully.</p>
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="paramId" className="form-label">Parameter ID:</label>
+              <input type="number" id="paramId" className="form-control" value={paramId} onChange={(e) => setParamId(e.target.value)} required />
+            </div>
+            <button type="submit" className="btn btn-danger">Delete Parameter</button>
+          </form>
+          {success && (
+            <div className="mt-4">
+              <p className="text-success">Parameter deleted successfully.</p>
+            </div>
+          )}
+          {error && <p className="mt-4 text-danger">Error: {error}</p>}
         </div>
-      )}
-      {error && <p className="mt-4 text-danger">Error: {error}</p>}
+      </div>
     </div>
   );
 };

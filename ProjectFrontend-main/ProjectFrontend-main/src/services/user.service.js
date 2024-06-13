@@ -23,6 +23,7 @@ const getAdminBoard = (payload) => {
      // Set the payload as params
   });
 };
+
 const AddQuotation = (payload) => {
   console.log(authHeader());
   return axios.post(MANAGER_URL + "addquotation",payload, {

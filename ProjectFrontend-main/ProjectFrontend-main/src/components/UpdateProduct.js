@@ -75,57 +75,65 @@ const UpdateProduct = ({ product, productId, onProductUpdate }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Update Product</h3>
-      <div>
-        <label htmlFor="productName">Product Name:</label>
-        <input
-          type="text"
-          id="productName"
-          value={updatedProduct.name}
-          onChange={(e) => setUpdatedProduct(prevProduct => ({ ...prevProduct, name: e.target.value }))}
-          required
-        />
-      </div>
-      {updatedProduct.features.map((feature, featureIndex) => (
-        <div key={feature.id}>
-          <h4>Feature Name:</h4>
-          <input
-            type="text"
-            value={feature.name}
-            onChange={(e) => handleFeatureNameChange(featureIndex, e.target.value)}
-            required
-          />
-          <h5>Product ID:</h5>
-          <input
-            type="text"
-            value={feature.product.id}
-            onChange={(e) => handleProductIdChange(featureIndex, e.target.value)}
-            required
-          />
-          <h5>Product Name:</h5>
-          <input
-            type="text"
-            value={feature.product.name}
-            onChange={(e) => handleProductNameChange(featureIndex, e.target.value)}
-            required
-          />
-          {feature.parameters.map((param, parameterIndex) => (
-            <div key={param.id}>
-              <label htmlFor={`param-${featureIndex}-${parameterIndex}`}>{param.name}:</label>
+    <div className="container mt-5">
+      <div className="card">
+        <div className="card-header">
+          <h3 className="mb-0">Update Product</h3>
+        </div>
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="productName">Product Name:</label>
               <input
                 type="text"
-                id={`param-${featureIndex}-${parameterIndex}`}
-                value={param.value}
-                onChange={(e) => handleParameterChange(featureIndex, parameterIndex, e.target.value)}
+                id="productName"
+                value={updatedProduct.name}
+                onChange={(e) => setUpdatedProduct(prevProduct => ({ ...prevProduct, name: e.target.value }))}
                 required
               />
             </div>
-          ))}
+            {updatedProduct.features.map((feature, featureIndex) => (
+              <div key={feature.id}>
+                <h4>Feature Name:</h4>
+                <input
+                  type="text"
+                  value={feature.name}
+                  onChange={(e) => handleFeatureNameChange(featureIndex, e.target.value)}
+                  required
+                />
+                <h5>Product ID:</h5>
+                <input
+                  type="text"
+                  value={feature.product.id}
+                  onChange={(e) => handleProductIdChange(featureIndex, e.target.value)}
+                  required
+                />
+                <h5>Product Name:</h5>
+                <input
+                  type="text"
+                  value={feature.product.name}
+                  onChange={(e) => handleProductNameChange(featureIndex, e.target.value)}
+                  required
+                />
+                {feature.parameters.map((param, parameterIndex) => (
+                  <div key={param.id}>
+                    <label htmlFor={`param-${featureIndex}-${parameterIndex}`}>{param.name}:</label>
+                    <input
+                      type="text"
+                      id={`param-${featureIndex}-${parameterIndex}`}
+                      value={param.value}
+                      onChange={(e) => handleParameterChange(featureIndex, parameterIndex, e.target.value)}
+                      required
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
+            <button type="submit">Update Product</button>
+          </form>
         </div>
-      ))}
-      <button type="submit">Update Product</button>
-    </form>
+      </div>
+    </div>
   );
 };
 
