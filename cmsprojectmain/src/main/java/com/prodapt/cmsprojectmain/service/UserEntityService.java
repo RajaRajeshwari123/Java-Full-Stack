@@ -22,5 +22,6 @@ public interface UserEntityService {
 	UserEntity getUserEntityById(Integer id) throws UserNotFoundException; 
 	
 	public Optional<UserEntity> findById(Integer id) throws UserNotFoundException;
+	public Iterable<UserEntity> getAllUsers();
 	    
 }

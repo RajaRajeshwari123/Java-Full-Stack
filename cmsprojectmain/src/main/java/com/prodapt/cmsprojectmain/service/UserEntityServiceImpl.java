@@ -69,4 +69,8 @@ public class UserEntityServiceImpl implements UserEntityService {
 		return user;
 	}
 
+	@Override
+	 public Iterable<UserEntity> getAllUsers() {
+	        return repo.findAll();
+	    }
 }

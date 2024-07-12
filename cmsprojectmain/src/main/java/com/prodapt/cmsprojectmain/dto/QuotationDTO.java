@@ -14,9 +14,11 @@ import lombok.ToString;
 public class QuotationDTO {
 
     private Long id;
-    private Integer userId; 
+
     private Long productId;
     private Double totalAmount;
     private Integer quantity;
+    private Long featureId;
+
 }
 

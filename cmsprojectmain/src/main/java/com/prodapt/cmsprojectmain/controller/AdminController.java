@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.prodapt.cmsprojectmain.entities.Features;
 import com.prodapt.cmsprojectmain.entities.Product;
 import com.prodapt.cmsprojectmain.entities.Role;
+import com.prodapt.cmsprojectmain.entities.UserEntity;
 import com.prodapt.cmsprojectmain.exceptions.FeatureNotFoundException;
 import com.prodapt.cmsprojectmain.exceptions.ParameterNotFoundException;
 import com.prodapt.cmsprojectmain.exceptions.ProductNotFoundException;
@@ -26,13 +27,13 @@ import com.prodapt.cmsprojectmain.exceptions.UserNotFoundException;
 import com.prodapt.cmsprojectmain.service.FeatureService;
 import com.prodapt.cmsprojectmain.service.ParameterService;
 import com.prodapt.cmsprojectmain.service.ProductService;
+import com.prodapt.cmsprojectmain.service.RoleService;
 import com.prodapt.cmsprojectmain.service.UserEntityService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import lombok.Setter;
-
 
 @RestController
 @RequestMapping("/api/v1/admin")
@@ -51,19 +52,25 @@ public class AdminController {
 	@Autowired
 	private ParameterService parameterService;
 
+	@Autowired
+	private UserEntityService userservice;
+
+	@Autowired
+	private RoleService roleservice;
+
 	@Operation(summary = "Create Product in APP")
 	@PostMapping("/addproduct")
 	public ResponseEntity<Product> addProduct(@RequestBody Product product) {
 		loggers.info("Inside addProduct " + AdminController.class.getName());
 		Product prd = productService.createproduct(product);
-		 loggers.info("Call to service layer method is success");
+		loggers.info("Call to service layer method is success");
 		return new ResponseEntity<Product>(prd, HttpStatus.CREATED);
 	}
 
 	@Operation(summary = "Create Feature in APP")
 	@PostMapping("/addfeature")
 	public ResponseEntity<Features> addFeature(@RequestBody Features feature) {
-		 loggers.info("Inside addFeatures " + AdminController.class.getName());
+		loggers.info("Inside addFeatures " + AdminController.class.getName());
 		Features features = featureService.createFeature(feature);
 		loggers.info("Call to service layer method is success");
 		return new ResponseEntity<Features>(features, HttpStatus.CREATED);
@@ -111,9 +118,8 @@ public class AdminController {
 
 	@Operation(summary = "Delete Product By Id")
 	@PostMapping("/deleteproductbyid")
-	public ResponseEntity<String> deleteProductById(@RequestBody Long productId)
-			throws ProductNotFoundException {
-		 loggers.info("Inside DeleteProductById " + AdminController.class.getName());
+	public ResponseEntity<String> deleteProductById(@RequestBody Long productId) throws ProductNotFoundException {
+		loggers.info("Inside DeleteProductById " + AdminController.class.getName());
 		String deleteproduct = productService.deleteProductid(productId);
 		loggers.info("Call to service layer method is success");
 		return new ResponseEntity<String>(deleteproduct, HttpStatus.OK);
@@ -122,8 +128,7 @@ public class AdminController {
 
 	@Operation(summary = "Delete Feature By Id")
 	@PostMapping("/deletefeaturebyid")
-	public ResponseEntity<String> deleteFeatureById(@RequestBody Long featureId)
-			throws FeatureNotFoundException {
+	public ResponseEntity<String> deleteFeatureById(@RequestBody Long featureId) throws FeatureNotFoundException {
 		loggers.info("Inside DeleteFeatureById " + AdminController.class.getName());
 		String deletefeature = featureService.deleteFeatureById(featureId);
 		loggers.info("Call to service layer method is success");
@@ -133,8 +138,7 @@ public class AdminController {
 
 	@Operation(summary = "Delete Parameter By Id")
 	@PostMapping("/deleteparameterbyid")
-	public ResponseEntity<String> deleteParameterById(@RequestBody Long parameterId)
-			throws ParameterNotFoundException {
+	public ResponseEntity<String> deleteParameterById(@RequestBody Long parameterId) throws ParameterNotFoundException {
 		loggers.info("Inside DeleteParameterById " + AdminController.class.getName());
 		String deleteparameter = parameterService.deleteParameterById(parameterId);
 		loggers.info("Call to service layer method is success");
@@ -152,6 +156,18 @@ public class AdminController {
 		String result = userService.updateRole(userId, role);
 		return ResponseEntity.ok(result);
 
+	}
+
+	@GetMapping("/getallusers")
+	public ResponseEntity<Iterable<UserEntity>> getAllUsers() {
+		Iterable<UserEntity> users = userservice.getAllUsers();
+		return ResponseEntity.ok(users);
+	}
+
+	@GetMapping("/getallroles")
+	public ResponseEntity<Iterable<Role>> getAllRoles() {
+		Iterable<Role> role = roleservice.getAllRole();
+		return ResponseEntity.ok(role);
 	}
 
 }

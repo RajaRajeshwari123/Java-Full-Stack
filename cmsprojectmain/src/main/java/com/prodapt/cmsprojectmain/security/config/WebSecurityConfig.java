@@ -20,20 +20,15 @@ import com.prodapt.cmsprojectmain.security.jwt.AuthTokenFilter;
 import com.prodapt.cmsprojectmain.security.service.UserDetailsServiceImpl;
 
 @Configuration
-@EnableWebSecurity 
-public class WebSecurityConfig { 
+@EnableWebSecurity
+public class WebSecurityConfig {
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
-
-	@Autowired
-	private AuthEntryPointJwt unauthorizedHandler;
 
 	@Bean
 	public AuthTokenFilter authenticationJwtTokenFilter() {
 		return new AuthTokenFilter();
 	}
-
-
 
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
@@ -55,17 +50,17 @@ public class WebSecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 
-	public final static String[] PUBLIC_REQUEST_MATCHERS = { "/api/auth/**","/api/test/all","/api-docs/**", "/swagger-ui/**","/v3/api-docs/**" };
+	public final static String[] PUBLIC_REQUEST_MATCHERS = { "/api/auth/**", "/api/test/all", "/api-docs/**",
+			"/swagger-ui/**", "/v3/api-docs/**" ,"/api/v1/admin/getallproducts"};
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		//http.cors(AbstractHttpConfigurer :: disable)
 		http.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(req -> req.requestMatchers(PUBLIC_REQUEST_MATCHERS).permitAll()
 						.requestMatchers("/api/v1/customer/**").hasRole("CUSTOMER")
 						.requestMatchers("/api/v1/manager/**").hasRole("MANAGER")
-				.requestMatchers( "/api/v1/admin/**").hasRole("ADMIN"))
-						//.anyRequest().authenticated())
+						.requestMatchers("/api/v1/admin/**").hasRole("ADMIN"))
+				// .anyRequest().authenticated())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authenticationProvider(authenticationProvider())
 				.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

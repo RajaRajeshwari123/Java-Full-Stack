@@ -34,7 +34,6 @@ public class QuotationServiceImplTest {
 	public void setup() {
 		quotation = new Quotation();
 		quotation.setId(1L);
-		quotation.setUserEntity(new UserEntity());
 		quotation.setProduct(new Product());
 		quotation.setTotalAmount(100.0);
 		quotation.setQuantity(2);

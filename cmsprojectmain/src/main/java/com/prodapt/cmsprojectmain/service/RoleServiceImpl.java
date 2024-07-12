@@ -25,7 +25,10 @@ public class RoleServiceImpl implements RoleService {
 		Optional<Role> role= repo.findById(id);
 		return role;
 	}
-	
+	@Override
+	 public Iterable<Role> getAllRole() {
+	        return repo.findAll();
+	    }
 	
 	
 

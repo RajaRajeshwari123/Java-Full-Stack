@@ -108,6 +108,11 @@
   		<artifactId>junitexample</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
+  	<dependency>
+  		<groupId>com.prodapt</groupId>
+  		<artifactId>cmsprojectdemo</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
 	</dependencies>
 
 	<build>

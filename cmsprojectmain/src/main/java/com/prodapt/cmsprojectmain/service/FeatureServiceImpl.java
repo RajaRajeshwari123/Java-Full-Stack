@@ -1,5 +1,6 @@
 package com.prodapt.cmsprojectmain.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -36,5 +37,35 @@ public class FeatureServiceImpl implements FeatureService {
 			throw new FeatureNotFoundException();
 		}
 	}
+	
+//	@Override
+//	public Features getFeatureById(Long featureId) throws FeatureNotFoundException {
+//	    Optional<Features> feature = repo.findById(featureId);
+//	    if (feature.isPresent()) {
+//	        
+//	        return feature.get();
+//	    } else {
+//	      
+//	        throw new FeatureNotFoundException("Feature " + featureId + " doesn't exist");
+//	    }
+//	}
+	@Override
+	public Features getFeatureById(Long featureId) throws FeatureNotFoundException {
+	    Optional<Features> feature = repo.findById(featureId);
+	    if (feature.isPresent()) {
+	        
+	        return feature.get();
+	    } else {
+	      
+	        throw new FeatureNotFoundException("Feature " + featureId + " doesn't exist");
+	    }
+	}
+	
+	  @Override
+	    public List<Features> getFeaturesByProductId(Long productId) {
+	        // Implement logic to fetch features for the given productId
+	        return repo.findByProductId(productId);
+	    }
+	}
 
-}
+
