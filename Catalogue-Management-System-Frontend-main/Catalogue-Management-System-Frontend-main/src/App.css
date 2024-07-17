@@ -1,0 +1,281 @@
+/* App.css */
+
+/* General styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #536475;
+}
+
+.app-navbar {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #202936 0%, #5086dc 100%);
+}
+/* Navbar styles */
+.navbar {
+  background-color: #ffffff !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  color: #007bff !important;
+  transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: #0056b3 !important;
+}
+
+.nav-link {
+  color: #495057 !important;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #007bff !important;
+}
+
+.btn-outline-custom {
+  color: #007bff;
+  border-color: #007bff;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-custom:hover {
+  color: #ffffff;
+  background-color: #007bff;
+}
+
+/* Container styles */
+.container-links {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: #fbf8f8;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,.1);
+  margin-top: 2rem;
+}
+
+/* Form styles */
+form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  border-radius: 4px;
+}
+
+/* Button styles */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+/* Card styles */
+.card {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: column;
+  }
+  
+  .navbar-nav .nav-item {
+    margin-bottom: 0.5rem;
+  }
+  
+  .container-links {
+    padding: 1rem;
+  }
+}
+
+/* Animation for page transitions */
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+}
+
+/* Additional styles for other components can be added here */
+.card-container {
+  max-width: 350px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #3e7fc5;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-img-card {
+  width: 100px;
+  height: 100px;
+  margin: 20px auto;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-control {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.form-control:focus {
+  border-color: #337ab7;
+  box-shadow: 0 0 10px rgba(51, 122, 183, 0.5);
+}
+
+.btn-primary {
+  background-color: #337ab7;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #23527c;
+}
+
+.btn-primary:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.spinner-border {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #337ab7;
+  border-top: 2px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.alert {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f7f7f7;
+  color: #333;
+}
+
+.alert-danger {
+  background-color: #ffe6e6;
+  border-color: #ff0000;
+  color: #ff0000;
+}
+/* AddProductAndFeatures.css */
+
+.product-container {
+  margin-top: 3rem;
+}
+
+.product-card {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.product-form .form-control {
+  border-radius: 20px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.product-form .form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+}
+
+.custom-button {
+  background-color: #2c3e50;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+}
+
+.custom-button:hover {
+  background-color: #34495e;
+  transform: translateY(-2px);
+}
+
+.custom-modal .modal-content {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border-radius: 15px;
+}
+
+.custom-modal .modal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.custom-modal .modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.alert-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}

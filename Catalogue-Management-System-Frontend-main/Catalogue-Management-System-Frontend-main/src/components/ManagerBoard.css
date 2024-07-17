@@ -1,0 +1,38 @@
+.manager-dashboard {
+  background-color: #3d5564;
+    padding: 20px;
+  }
+  
+  .manager-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .manager-card:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+  }
+  
+  .manager-card.card-body {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .manager-card.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .manager-card.fa-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #337ab7;
+  }
+  
+  .manager-card:hover.fa-icon {
+    color: #23527c;
+  }

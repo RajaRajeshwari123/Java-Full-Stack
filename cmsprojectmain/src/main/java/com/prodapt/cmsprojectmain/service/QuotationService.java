@@ -12,4 +12,5 @@ public interface QuotationService {
     // Other service methods
     public List<Quotation> getAllQuotations();
     public String deleteQuotionbyid(Long id) throws QuotationNotFoundException;
+    Quotation updateQuotation(Quotation quotation);
 }

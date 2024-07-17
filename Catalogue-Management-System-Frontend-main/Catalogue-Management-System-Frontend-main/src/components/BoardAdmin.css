@@ -1,0 +1,55 @@
+.admin-dashboard {
+    background-color: #3d5564;
+    padding: 20px;
+  }
+  
+  .admin-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .admin-card:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+  }
+  
+  .admin-card .card-body {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .admin-card .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .admin-card .fa-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #0c0c0c;
+  }
+  
+  .admin-card:hover .fa-icon {
+    color: #070707;
+  }
+  
+  .text-primary {
+    color: #337ab7;
+  }
+  
+  .mb-4 {
+    margin-bottom: 20px;
+  }
+  
+  .py-4 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .h-100 {
+    height: 100%;
+  }

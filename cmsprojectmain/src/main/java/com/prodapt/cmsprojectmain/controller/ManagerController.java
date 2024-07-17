@@ -1,8 +1,9 @@
+
 package com.prodapt.cmsprojectmain.controller;
- 
+
 import java.util.List;
 import java.util.stream.Collectors;
- 
+
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,11 +13,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
- 
+
 import com.prodapt.cmsprojectmain.dto.QuotationDTO;
 import com.prodapt.cmsprojectmain.entities.Features;
 import com.prodapt.cmsprojectmain.entities.Product;
@@ -25,12 +27,11 @@ import com.prodapt.cmsprojectmain.entities.UserEntity;
 import com.prodapt.cmsprojectmain.exceptions.FeatureNotFoundException;
 import com.prodapt.cmsprojectmain.exceptions.ProductNotFoundException;
 import com.prodapt.cmsprojectmain.exceptions.QuotationNotFoundException;
- 
 import com.prodapt.cmsprojectmain.service.FeatureService;
 import com.prodapt.cmsprojectmain.service.ProductService;
 import com.prodapt.cmsprojectmain.service.QuotationService;
 import com.prodapt.cmsprojectmain.service.UserEntityService;
- 
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
  
@@ -40,7 +41,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class ManagerController {
 	 private static final Logger loggers = LoggerFactory.getLogger(ManagerController.class);
- 
+
 	    
 	@Autowired
 	private ProductService productService;
@@ -113,10 +114,10 @@ public class ManagerController {
 	public ResponseEntity<QuotationDTO> addQuotation(@RequestBody QuotationDTO quotationDTO)
 	        throws  ProductNotFoundException, FeatureNotFoundException {
 	    loggers.info("Inside addQuotation " + ManagerController.class.getName());
- 
+
 	    // Map QuotationDTO to Quotation entity
 	    Quotation quotation = modelMapper.map(quotationDTO, Quotation.class);
- 
+
 	    // Manually setting user and product to avoid LazyInitializationException
 	    Product product = productService.getProductById(quotationDTO.getProductId());
 	    if (product == null) {
@@ -126,20 +127,20 @@ public class ManagerController {
 	    if (feature == null) {
 	        throw new FeatureNotFoundException("Feature not found");
 	    }
- 
+
 	   
 	    quotation.setProduct(product);
 	    quotation.setFeature(feature);
- 
+
 	    // Save the quotation
 	    Quotation savedQuotation = quotationService.addQuotation(quotation);
- 
+
 	    // Map saved Quotation entity back to QuotationDTO
 	    QuotationDTO responseQuotationDTO = modelMapper.map(savedQuotation, QuotationDTO.class);
- 
+
 	    return new ResponseEntity<>(responseQuotationDTO, HttpStatus.CREATED);
 	}
- 
+
 	@Operation(summary = "Get Quotation By ID")
 	@GetMapping("/getquotationbyid")
 	public ResponseEntity<QuotationDTO> getQuotationById(@RequestParam("id") Long quotationId)
@@ -159,23 +160,23 @@ public class ManagerController {
 		Iterable<UserEntity> users = userService.getAllUsers();
 		return ResponseEntity.ok(users);
 	}
- 
+
 	 @GetMapping("/getallquotations")
 	    public ResponseEntity<List<QuotationDTO>> getAllQuotations() {
 	        loggers.info("Inside getAllQuotations " + ManagerController.class.getName());
- 
+
 	        // Fetch all quotations from the service
 	        List<Quotation> quotations = quotationService.getAllQuotations();
- 
+
 	        // Map Quotation entities to QuotationDTOs using ModelMapper and stream API
 	        List<QuotationDTO> responseQuotationDTOs = quotations.stream()
 	                .map(quotation -> modelMapper.map(quotation, QuotationDTO.class))
 	                .collect(Collectors.toList());
- 
+
 	        return new ResponseEntity<>(responseQuotationDTOs, HttpStatus.OK);
 	    }
-	
-	
+	 
+	 
 	 @Operation(summary = "Delete Quotation By Id")
 		@PostMapping("/deletequotationbyid")
 		public ResponseEntity<String> deleteQuotationById(@RequestBody Long productId) throws QuotationNotFoundException {
@@ -183,6 +184,35 @@ public class ManagerController {
 			String deleteQuotation = quotationService.deleteQuotionbyid(productId);
 			loggers.info("Call to service layer method is success");
 			return new ResponseEntity<String>(deleteQuotation, HttpStatus.OK);
- 
+
 		}
+	 
+	 @Operation(summary = "Update Quotation")
+	 @PutMapping("/updatequotation")
+	 public ResponseEntity<QuotationDTO> updateQuotation(@RequestBody QuotationDTO quotationDTO)
+	         throws QuotationNotFoundException {
+	     loggers.info("Inside updateQuotation " + ManagerController.class.getName());
+
+	     // Retrieve existing quotation
+	     Quotation existingQuotation = quotationService.getQuotationById(quotationDTO.getId());
+
+	     // Check if quotation exists
+	     if (existingQuotation == null) {
+	         throw new QuotationNotFoundException("Quotation not found with id: " + quotationDTO.getId());
+	     }
+
+	     // Update fields that can be modified
+	     existingQuotation.setTotalAmount(quotationDTO.getTotalAmount());
+	     existingQuotation.setQuantity(quotationDTO.getQuantity());
+
+	     // Save updated quotation
+	     Quotation updatedQuotation = quotationService.updateQuotation(existingQuotation);
+
+	     // Map updated Quotation entity back to QuotationDTO
+	     QuotationDTO responseQuotationDTO = modelMapper.map(updatedQuotation, QuotationDTO.class);
+
+	     return new ResponseEntity<>(responseQuotationDTO, HttpStatus.OK);
+	 }
+	 
+	 
 }

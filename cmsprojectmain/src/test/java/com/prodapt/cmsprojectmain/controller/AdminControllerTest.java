@@ -152,13 +152,11 @@ class AdminControllerTest {
 			assertEquals(HttpStatus.OK, response.getStatusCode());
 			assertEquals(products, response.getBody());
 	}
- 
-	
 	@Test
 	void testUpdateProduct_Success() throws ProductNotFoundException {
 			when(productService.updateProduct(1L, product)).thenReturn(product);
  
-			ResponseEntity<Product> response = adminController.updateProduct(1L, product);
+			ResponseEntity<Product> response = adminController.updateProduct(product);
 			assertNotNull(product);
 			assertEquals(HttpStatus.OK, response.getStatusCode());
 			assertEquals(product, response.getBody());
@@ -169,9 +167,8 @@ class AdminControllerTest {
 			when(productService.updateProduct(1L, product))
 					.thenThrow(new ProductNotFoundException("Product not found"));
 			assertNotNull(product);
-			assertThrows(ProductNotFoundException.class, () -> adminController.updateProduct(1L, product));
+			assertThrows(ProductNotFoundException.class, () -> adminController.updateProduct(product));
 	}
-
  
 	@Test
 	void testDeleteProductById_Success() throws ProductNotFoundException {

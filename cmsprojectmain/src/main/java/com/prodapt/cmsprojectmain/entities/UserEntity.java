@@ -44,8 +44,8 @@ public class UserEntity {
     @Column(nullable = false, name = "password")
     private String password;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
-    @JsonIgnore // Ignore role property during serialization and deserialization
+    
     private Role role;
 }

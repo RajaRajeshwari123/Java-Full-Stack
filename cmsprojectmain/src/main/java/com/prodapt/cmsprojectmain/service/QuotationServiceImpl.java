@@ -50,5 +50,9 @@ public class QuotationServiceImpl implements QuotationService {
 			throw new QuotationNotFoundException();
 		}
 	}
+    @Override
+    public Quotation updateQuotation(Quotation quotation) {
+        return quotationRepository.save(quotation);
+    }
 
 }
