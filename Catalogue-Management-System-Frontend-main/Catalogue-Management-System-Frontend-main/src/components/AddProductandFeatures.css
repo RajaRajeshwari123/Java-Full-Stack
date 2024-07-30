@@ -4,14 +4,14 @@
     justify-content: center;
     gap: 2rem;
     padding: 2rem;
-    background-color: #f0f4f8;
+    /* background-color: #73a2d1; */
     height: fit-content;
     flex-direction: column;
  
   }
  
   .form-card {
-    background-color: #ffffff;
+    background: linear-gradient(-45deg, #0f335a, #00bcd4);
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 2rem;

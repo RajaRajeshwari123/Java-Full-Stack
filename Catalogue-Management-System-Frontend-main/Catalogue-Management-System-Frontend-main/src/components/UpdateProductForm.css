@@ -9,7 +9,7 @@
  
   .card-header {
     border-radius: 10px 10px 0 0;
-    background-color: #87ceeb; /* Sky blue color */
+    background-color: linear-gradient(-45deg, #0f335a, #00bcd4); /* Sky blue color */
     color: #333; /* Darker text color for better contrast */
   }
  

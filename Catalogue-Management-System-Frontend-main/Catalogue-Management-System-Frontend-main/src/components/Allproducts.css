@@ -28,7 +28,7 @@
 }
 
 .product-card {
-  background-color: #ffffff;
+  background: linear-gradient(-45deg, #0f335a, #00bcd4);
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -74,7 +74,7 @@
 }
 
 .parameters-title {
-  color: #7f8c8d;
+  color: #1a022b;
   font-size: 1rem;
   margin-bottom: 0.5rem;
 }

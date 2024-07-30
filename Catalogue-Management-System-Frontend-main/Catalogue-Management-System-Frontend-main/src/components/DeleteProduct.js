@@ -88,11 +88,11 @@ const DeleteProduct = () => {
                   <FontAwesomeIcon icon={faTrashAlt} className="mr-2" /> Product deleted successfully.
                 </div>
               )}
-              {error && (
+              {/* {error && (
                 <div className="alert alert-danger mt-3" role="alert">
                   <strong>Error:</strong> {error}
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>

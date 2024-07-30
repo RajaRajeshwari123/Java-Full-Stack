@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import UserService from "../services/user.service";
-import "./ViewAllQuotation.css"; // Assuming you have a CSS file for styling
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faEdit, faDollarSign, faFileInvoiceDollar } from "@fortawesome/free-solid-svg-icons";
+import "./ViewAllQuotation.css";
 
 const ViewAllQuotation = () => {
   const [quotations, setQuotations] = useState([]);
@@ -74,7 +76,10 @@ const ViewAllQuotation = () => {
       <div className="row justify-content-center">
         <div className="col-md-10">
           <div className="card p-4 rounded">
-            <h2 className="mb-4">All Quotations</h2>
+            <h2 className="mb-4 text-center">
+              <FontAwesomeIcon icon={faFileInvoiceDollar} className="mr-2" />
+              All Quotations
+            </h2>
             <div className="table-responsive">
               <table className="table table-striped table-bordered">
                 <thead className="thead-dark">
@@ -96,6 +101,7 @@ const ViewAllQuotation = () => {
                       <td>{quotation.quantity}</td>
                       <td>
                         <Link to={`/update-quotation/${quotation.id}`} className="btn btn-primary btn-sm mr-2">
+                          <FontAwesomeIcon icon={faDollarSign} className="icon-spacing" />
                           Apply Discount
                         </Link>
                       </td>
@@ -104,6 +110,7 @@ const ViewAllQuotation = () => {
                           className="btn btn-danger btn-sm"
                           onClick={() => handleDeleteQuotation(quotation.id)}
                         >
+                          <FontAwesomeIcon icon={faTrash} className="icon-spacing" />
                           Delete
                         </button>
                       </td>

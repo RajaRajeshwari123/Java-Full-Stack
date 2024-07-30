@@ -87,6 +87,7 @@ const UpdateProduct = ({ product, onProductUpdate, products }) => {
     e.preventDefault();
     onProductUpdate(updatedProduct);
     setShowAlert(true); // Show alert after form submission
+    alert("Product updated successfully!");
   };
  
   if (!updatedProduct) {
@@ -188,11 +189,11 @@ const UpdateProduct = ({ product, onProductUpdate, products }) => {
             Update Product
           </button>
         </form>
-        {showAlert && (
+        {/* {showAlert && (
           <div className="alert alert-success" role="alert">
             Product updated successfully!
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

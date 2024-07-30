@@ -47,8 +47,8 @@ import ProductByNameadmin from "./components/ProductByNameadmin";
 import ProductByNamemgr from "./components/ProductByNamemgr";
 import UpdateRole from "./components/UpdateRole";
 import AllUsers from "./components/AllUsers";
-import About from "./components/About";
-import Contact from "./components/Contact";
+// import About from "./components/About";
+// import Contact from "./components/Contact";
 import AddProductAndFeatures from "./components/AddProductandFeatures";
 import ViewAllQuotations from "./components/ViewAllQuotations";
 import UpdateQuotation from "./components/UpdateQuotation";
@@ -119,7 +119,7 @@ const App = () => {
   </Link>
 </li>
 
-<li className="nav-item">
+{/* <li className="nav-item">
   <Link to={"/about"} className="nav-link">
     <FontAwesomeIcon icon={faInfoCircle} className="me-1" />
     About
@@ -131,7 +131,7 @@ const App = () => {
     <FontAwesomeIcon icon={faAddressBook} className="me-1" />
     Contact
   </Link>
-</li>
+</li> */}
 
 
             {/* Manager Dashboard link (conditionally rendered based on showManagerBoard) */}
@@ -210,8 +210,8 @@ const App = () => {
           <Route path="/" element={<ViewAllProducts/>} />
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
-           <Route path="/about" element={<About />} />
-      <Route path="/contact" element={<Contact />} />
+           {/* <Route path="/about" element={<About />} /> */}
+      {/* <Route path="/contact" element={<Contact />} /> */}
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin" element={<BoardAdmin />} />
@@ -237,7 +237,7 @@ const App = () => {
           {/* <Route path="/create-quotation" element={<AddQuotation />} /> */}
           <Route path="/get-quotation" element={<ViewAllQuotations/>} />
           <Route path="/update-rolepage/:userId" element={<UpdateRole/>}/>
-          <Route path="/add-products" element={<AddProductAndFeatures />} />
+          <Route path="add-products" element={<AddProductAndFeatures />} />
           <Route path="/updateroles" element={<AllUsers/>} />
           <Route exact path="/update-quotation/:quotationId" element={<UpdateQuotation/>} />
         </Routes>
